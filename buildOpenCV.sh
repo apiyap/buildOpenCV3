@@ -2,7 +2,7 @@
 # License: MIT. See license file in root directory
 # Copyright(c) JetsonHacks (2017-2019)
 
-OPENCV_VERSION=4.1.1
+OPENCV_VERSION=3.4.6
 # Jetson Nano
 ARCH_BIN=5.3
 INSTALL_DIR=/usr/local
@@ -114,17 +114,22 @@ sudo apt-get install -y python3-dev python3-numpy python3-py python3-pytest
 sudo apt-get install -y libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev 
 
 cd $OPENCV_SOURCE_DIR
-git clone --branch "$OPENCV_VERSION" https://github.com/opencv/opencv.git
-git clone --branch "$OPENCV_VERSION" https://github.com/opencv/opencv_contrib.git
 
-if [ $DOWNLOAD_OPENCV_EXTRAS == "YES" ] ; then
- echo "Installing opencv_extras"
- # This is for the test data
- cd $OPENCV_SOURCE_DIR
- git clone https://github.com/opencv/opencv_extra.git
- cd opencv_extra
- git checkout -b v${OPENCV_VERSION} ${OPENCV_VERSION}
-fi
+#git clone --branch "$OPENCV_VERSION" https://github.com/opencv/opencv.git
+#git clone --branch "$OPENCV_VERSION" https://github.com/opencv/opencv_contrib.git
+
+#if [ $DOWNLOAD_OPENCV_EXTRAS == "YES" ] ; then
+#echo "Installing opencv_extras"
+# This is for the test data
+# cd $OPENCV_SOURCE_DIR
+# git clone https://github.com/opencv/opencv_extra.git
+# cd opencv_extra
+# git checkout -b v${OPENCV_VERSION} ${OPENCV_VERSION}
+#fi
+
+wget https://github.com/opencv/opencv/archive/3.4.6.zip \
+       -O opencv-3.4.6.zip
+unzip opencv-3.4.0.zip
 
 # Patch the Eigen library issue ...
 cd $OPENCV_SOURCE_DIR/opencv
