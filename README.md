@@ -42,11 +42,5 @@ OpenCV is a very rich environment, with many different options available. Check 
 * Python 2 bindings
 * Python 3 bindings
 
-## Packaging
-By default, the build will create a OpenCV package. The package file will be found in:
-<blockquote>opencv/build/_CPACK_Packages/Linux/STGZ/OpenCV-4.1.1-<<em>commit</em>>-aarch64.sh</blockquote>
-
-The advantage of packaging is that you can use the resulting package file to install this OpenCV build on other machines without having to rebuild. Whether the OpenCV package is built or not is controlled by the CMake directive <b>CPACK_BINARY_DEB</b> in the script.
-
 ## Notes
 
