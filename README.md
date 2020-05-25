@@ -44,3 +44,5 @@ OpenCV is a very rich environment, with many different options available. Check 
 
 ## Notes
 
+chmod +x buildOpenCV.sh
+./buildOpenCV.sh
