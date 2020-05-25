@@ -1,7 +1,7 @@
 #!/bin/bash
 # License: MIT. See license file in root directory
 # Copyright(c) JetsonHacks (2017-2019)
-
+set -e
 OPENCV_VERSION=3.4.6
 # Jetson Nano
 ARCH_BIN=5.3
@@ -103,8 +103,9 @@ sudo apt-get install -y \
 # We will be supporting OpenGL, we need a little magic to help
 # https://devtalk.nvidia.com/default/topic/1007290/jetson-tx2/building-opencv-with-opengl-support-/post/5141945/#5141945
 cd /usr/local/cuda/include
+set +e
 sudo patch -N cuda_gl_interop.h $WHEREAMI'/patches/OpenGLHeader.patch' 
-
+set -e
 # Python 2.7
 sudo apt-get install -y python-dev  python-numpy  python-py  python-pytest
 # Python 3.6
@@ -119,8 +120,8 @@ cd $OPENCV_SOURCE_DIR
 #git clone --branch "$OPENCV_VERSION" https://github.com/opencv/opencv_contrib.git
 
 #if [ $DOWNLOAD_OPENCV_EXTRAS == "YES" ] ; then
-#echo "Installing opencv_extras"
-# This is for the test data
+# echo "Installing opencv_extras"
+ # This is for the test data
 # cd $OPENCV_SOURCE_DIR
 # git clone https://github.com/opencv/opencv_extra.git
 # cd opencv_extra
@@ -129,14 +130,19 @@ cd $OPENCV_SOURCE_DIR
 
 wget https://github.com/opencv/opencv/archive/3.4.6.zip \
        -O opencv-3.4.6.zip
-unzip opencv-3.4.0.zip
+wget https://github.com/opencv/opencv_contrib/archive/3.4.6.zip \
+       -O opencv_contrib.zip
+unzip opencv-3.4.6.zip
+unzip opencv_contrib.zip
 
 # Patch the Eigen library issue ...
-cd $OPENCV_SOURCE_DIR/opencv
+cd $OPENCV_SOURCE_DIR/opencv-3.4.6
+echo "Patch the Eigen library issue ..."
+set +e
 sed -i 's/include <Eigen\/Core>/include <eigen3\/Eigen\/Core>/g' modules/core/include/opencv2/core/private.hpp
-
+set -e
 # Create the build directory and start cmake
-cd $OPENCV_SOURCE_DIR/opencv
+cd $OPENCV_SOURCE_DIR/opencv-3.4.6
 mkdir build
 cd build
 
@@ -172,7 +178,7 @@ time cmake -D CMAKE_BUILD_TYPE=RELEASE \
       -D BUILD_opencv_python3=ON \
       -D BUILD_TESTS=OFF \
       -D BUILD_PERF_TESTS=OFF \
-      -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules \
+      -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib-3.4.6/modules \
       $"PACKAGE_OPENCV" \
       ../
 
@@ -208,7 +214,7 @@ else
 fi
 
 echo "Installing ... "
-sudo make install
+sudo make install > installLog.txt 2>&1
 sudo ldconfig
 if [ $? -eq 0 ] ; then
    echo "OpenCV installed in: $CMAKE_INSTALL_PREFIX"
