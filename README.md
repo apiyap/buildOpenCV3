@@ -1,10 +1,10 @@
 # buildOpenCV
-Script for building OpenCV 4 on the NVIDIA Jetson Nano Developer Kit
+Script for building OpenCV 3 on the NVIDIA Jetson Nano Developer Kit
 
 Building for:
 * Jetson Nano
 * L4T 32.2.1/JetPack 4.2.2
-* OpenCV 4.1.1
+* OpenCV 3.4.6
 * Packaging Option ( Builds package by default; --no_package does not build package)
 
 <em><b>Note: </b>The script does not check to see which version of L4T is running before building, understand the script may only work with the stated versions.</em>
@@ -50,9 +50,3 @@ The advantage of packaging is that you can use the resulting package file to ins
 
 ## Notes
 
-<b>November 2019, Initial Release</b>
-
-* Jetson Nano
-* L4T 32.2.1/JetPack 4.2.2
-* OpenCV 4.1.1
-* Packaging Option ( Builds package by default; --no_package does not build package)
