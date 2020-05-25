@@ -43,6 +43,7 @@ OpenCV is a very rich environment, with many different options available. Check 
 * Python 3 bindings
 
 ## Notes
-
+<pre>
 chmod +x buildOpenCV.sh
 ./buildOpenCV.sh
+</pre>
