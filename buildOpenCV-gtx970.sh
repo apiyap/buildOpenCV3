@@ -254,6 +254,8 @@ if [ "$PACKAGE_OPENCV" != "" ] ; then
    fi
 fi
 
+echo "export PATH=/usr/local/bin:/usr/local/lib:${PATH}" >> ~/.bashrc
+source ~/.bashrc
 
 # check installation
 IMPORT_CHECK="$(python -c "import cv2 ; print cv2.__version__")"
