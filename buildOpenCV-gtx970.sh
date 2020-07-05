@@ -254,7 +254,7 @@ if [ "$PACKAGE_OPENCV" != "" ] ; then
    fi
 fi
 
-echo "export PATH=/usr/local/bin:/usr/local/lib:${PATH}" >> ~/.bashrc
+echo "export PATH=/usr/local/bin:/usr/local/lib:\${PATH}" >> ~/.bashrc
 source ~/.bashrc
 
 # check installation
